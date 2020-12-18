@@ -1,37 +1,24 @@
- <img align="left"  height="116" src="https://github.com/nasraldin/IdentityServer/blob/dev/docs/id4core.jpg" />
+ <img align="left"  height="116" src="https://github.com/nasraldin/CodeZero/blob/main/devcode.png" />
  
- # Open source Identity as a Microservice
-[![Build Status](https://dev.azure.com/nasreldin/IdentityServer/_apis/build/status/nasraldin.IdentityServer?branchName=dev)](https://dev.azure.com/nasreldin/IdentityServer/_build/latest?definitionId=1&branchName=dev)
- [![Build Status](https://travis-ci.com/nasraldin/IdentityServer.svg?branch=dev)](https://travis-ci.com/nasraldin/IdentityServer)
- [![Build status](https://ci.appveyor.com/api/projects/status/inu5ud3soeu1ao8r?svg=true)](https://ci.appveyor.com/project/nasraldin/identityserver)
- [![CircleCI](https://circleci.com/gh/nasraldin/IdentityServer.svg?style=svg)](https://circleci.com/gh/nasraldin/IdentityServer)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=nasraldin_IdentityServer&metric=alert_status)](https://sonarcloud.io/dashboard?id=nasraldin_IdentityServer)
+ # CodeZero Template - Clean Architecture, Microservice, DDD
 
 <br/>
-
-
-## About IdentityService
-IdentityService is a free, open source build on [ASP.NET Core Identity](https://github.com/dotnet/aspnetcore) and [IdentityServer4](https://github.com/IdentityServer/IdentityServer4) framework for centralized identity system. IdentityService incorporates all the protocol implementations and extensibility points needed to integrate token-based authentication, SSO single-sign-on and API access control in your applications.
 
 
 ## Give a Star! :star:
 If you like or are using this project to learn or start your solution, please give it a star. Thanks!
 
 
-## Project Status
-IdentityService is in development and not ready yet to use. please follow up on this repo to get the latest info when we ready to release.
-
-
 ## Technologies
-* .NET Core 3.1
-* ASP .NET Core 3.1
-* Entity Framework Core 3.1
-* IdentityServer4
+* .NET 5
+* ASP .NET 5
+* Entity Framework 5
 * MediatR
 * Autofac
 * AutoMapper
 * FluentValidation
 * XUnit, ReportGenerator, Moq & Shouldly
+* CodeZero
 
 
 # Goals
@@ -49,13 +36,13 @@ This will contain all entities, enums, exceptions, interfaces, types and logic s
 
 This layer contains all application logic and classes for accessing external resources such as file systems, web services, smtp, and so on. These classes should be based on interfaces defined within the core layer. It is dependent on the core layer, but has no dependencies on any other layer or project.
 
-### WebApi
+### API
 
-This layer is a RestApi application based and ASP.NET Core API 3.1. This layer depends on the Infrastructure layer.
+This layer is a RestApi application based and ASP.NET Core WebAPI 5.0. This layer depends on the Infrastructure layer.
 
 
 ## Branch structure
-Active development happens on the dev branch. This always contains the latest version. The master branch contains the latest versions of the stable codebase. The prod branch contains a codebase for production release.
+Active development happens on the dev branch. This always contains the latest version. The main branch contains the latest versions of the stable codebase. The prod branch contains a codebase for production release.
 
 
 ## Contributors and Using the GitHub Repository
@@ -70,15 +57,8 @@ You should **fork this repository** only if you plan on submitting a pull reques
 You should **clone this repository** if you're one of the contributors and you have commit access to it. Otherwise you probably want one of the other options.
 
 
-## Acknowledgements
-IdentityService is built using the following great open source projects and free services:
-
-* [ASP.NET Core](https://github.com/dotnet/aspnetcore)
-* [IdentityServer4](https://github.com/IdentityServer/IdentityServer4)
-
-
 ## Support
-If you are having problems, please let us know by use the [issue tracker](https://github.com/nasraldin/IdentityServer/issues) for that. fill free to support us to request a feature or enhance code or bug report.
+If you are having problems, please let us know by use the [issue tracker](https://github.com/nasraldin/codezero-template/issues) for that. fill free to support us to request a feature or enhance code or bug report.
 
 
 ## License
