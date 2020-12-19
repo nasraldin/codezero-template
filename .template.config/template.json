@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Nasr Aldin",
+  "classifications": ["WebAPI", "Web", "Solution", "CodeZero"],
+  "name": "CodeZero Solution",
+  "description": "A template for a starting point with providing the minimum amount of code required to get you going. Clean Architecture, DDD, SOLID, CQRS",
+  "shortName": "codezero",
+  "defaultName": "codezero",
+  "groupIdentity": "CodeZero.NuGetPackage",
+  "identity": "CodeZero.NuGetPackage.Template",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "CodeZeroTemplate",
+  "preferNameDirectory": true,
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/README.md",
+        "**/nuget.config",
+        "**/LICENSE",
+        "**/.gitattributes",
+        "**/.gitignore",
+        "**/*.nupkg",
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        ".template.config/**/*",
+        ".vs/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/.git/**",
+        "**/.github/**",
+        "*.nuspec",
+        "**/.DS_Store"
+      ]
+    }
+  ]
+}
