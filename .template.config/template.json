@@ -2,12 +2,12 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Nasr Aldin",
   "classifications": ["WebAPI", "Web", "Solution", "CodeZero"],
-  "name": "CodeZero Solution",
+  "name": "CodeZero Template",
   "description": "A template for a starting point with providing the minimum amount of code required to get you going. Clean Architecture, DDD, SOLID, CQRS",
   "shortName": "codezero",
   "defaultName": "codezero",
-  "groupIdentity": "CodeZero.NuGetPackage",
-  "identity": "CodeZero.NuGetPackage.Template",
+  "groupIdentity": "CodeZero",
+  "identity": "CodeZero.Template",
   "tags": {
     "language": "C#",
     "type": "project"
@@ -34,7 +34,11 @@
         "**/.git/**",
         "**/.github/**",
         "*.nuspec",
-        "**/.DS_Store"
+        "**/.DS_Store",
+        "**/.gitlab-ci.yml",
+        "**/.gitpod.yml",
+        "**/appveyor.yml",
+        "**/codecov.yml"
       ]
     }
   ]

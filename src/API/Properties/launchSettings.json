@@ -11,6 +11,14 @@
       "dotnetRunMessages": "true",
       "applicationUrl": "https://localhost:5001"
     },
+    "Staging": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Staging"
+      },
+      "applicationUrl": "https://localhost:5001"
+    },
     "Production": {
       "commandName": "Project",
       "launchBrowser": false,

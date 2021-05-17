@@ -1,0 +1,16 @@
+image: mcr.microsoft.com/dotnet/sdk
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - "dotnet restore ./CodeZeroTemplate.sln --no-cache --force"
+    - "dotnet build ./CodeZeroTemplate.sln -c Release --no-restore"
+
+test:
+  stage: test
+  script:
+    - "dotnet test ./tests/UnitTests/UnitTests.csproj"

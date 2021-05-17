@@ -1,0 +1,50 @@
+version: "1.0.{build}"
+image: Visual Studio 2019
+branches:
+  only:
+    - dev
+init:
+  # Good practise, because Windows line endings are different from Unix/Linux ones
+  - cmd: git config --global core.autocrlf true
+
+install:
+  # Install repo specific stuff here
+  - choco install opencover.portable
+  - choco install codecov
+
+before_build:
+  - cmd: dotnet --version # Display .NET Core version
+  - dotnet restore ./CodeZeroTemplate.sln
+  - dotnet build ./CodeZeroTemplate.sln
+  - dotnet test ./tests/UnitTests/UnitTests.csproj
+
+build:
+  project: ./CodeZeroTemplate.sln
+  verbosity: minimal
+
+# build_script:
+#   # output will be in ./src/bin/debug/netcoreapp1.1/publish
+#   - cmd: dotnet publish ./src/src.csproj
+
+# after_build:
+# For once the build has completed
+# artifacts:
+#   - path: '\src\bin\Debug\netcoreapp1.1\publish'
+#     name: WebApi
+#     type: WebDeployPackage
+
+clone_depth: 1
+test_script:
+  # restore packages for our unit tests
+  - cmd: dotnet restore ./tests/UnitTests/UnitTests.csproj --verbosity m
+  # run the unit tests (requires changing into the test directory)
+  - cmd: cd ./tests/UnitTests
+  - cmd: dotnet test
+  - cmd: mkdir coverage
+  - OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:test -filter:"+[UnitTestTargetProject*]* -[IdentityService*]*" -output:"./coverage/OpenCover.xml"
+  - codecov -f "./coverage/OpenCover.xml"
+
+# on_finish:
+# any cleanup in here
+
+deploy: off
