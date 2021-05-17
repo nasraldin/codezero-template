@@ -1,0 +1,23 @@
+docker compose up -d --build
+docker compose up -d --build api
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+
+docker scan api
+
+dotnet dev-certs https -ep .\.cert\aspnetapp.pfx -p nasr
+dotnet dev-certs https --trust
+
+dotnet tool update --global dotnet-ef --version 3.1.8
+        dotnet ef database update --project src/Infrastructure --startup-project src/WebApi
+        popd
+        dotnet build
+        dotnet test
+
+
+generate your ssh keys
+ssh-keygen -t ed25519 -f ssh_host_ed25519_key < /dev/null
+ssh-keygen -t rsa -b 4096 -f ssh_host_rsa_key < /dev/null
+
+
+docker-compose exec mariadb mysql -uroot -p -e 'SHOW DATABASES;'

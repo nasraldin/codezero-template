@@ -1,13 +1,21 @@
-version: '3.4'
+version: "3.7"
 
 services:
   api:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/root/.dotnet/https/api.dev.crt
+      - ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/root/.dotnet/https/api.dev.key
+      # - ASPNETCORE_Kestrel__Certificates__Default__Password=NasrAldin
+      # - ASPNETCORE_Kestrel__Certificates__Default__Path=/root/.dotnet/https/api.dev.pfx
+      - DOTNET_USE_POLLING_FILE_WATCHER=true
     ports:
       - "80"
-      - "443"
+      - "5001:443"
     volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - .cert/https:/root/.dotnet/https:ro
+      - dataprotection_keys:/root/.aspnet/DataProtection-Keys
+      # - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      # - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${HOME}/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+      - ${HOME}/.aspnet/https:/root/.aspnet/https:ro

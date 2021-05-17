@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>CodeZero.Template</id>
+    <title>CodeZero Template</title>
+    <version>1.0.0</version>
+    <authors>Nasr Aldin</authors>
+    <owners>Nasr Aldin</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://gitlab.com/nasraldin/codezero-template</projectUrl>
+    <description>A template for a starting point with providing the minimum amount of code required to get you going. Clean Architecture, DDD, SOLID, CQRS</description>
+    <copyright>Copyright 2020</copyright>
+    <tags>.net core, clean architecture, ddd, solid, cqrs</tags>
+    <releaseNotes>Initial release</releaseNotes>
+    <packageTypes>
+      <packageType name="Template" />
+    </packageTypes>
+    <icon>./content/icon.png</icon>
+  </metadata>
+  <files>
+    <file src=".\**" target="content" exclude="**\bin\**\*;**\obj\**\*;**\*.user;**\*.lock.json;**\.DS_Store;**\.git\**\*;**\.github\**\*;**\.vs\**\*;**\.vscode\**;**\*LICENSE;**\*.gitattributes;**\*README.md;**\*.gitignore;**\*nuget.config;.template.config\**\*;**\.gitlab-ci.yml;**\.gitpod.yml;**\appveyor.yml;**\codecov.yml;**\.imgs\**" />
+  </files>
+</package>

@@ -101,6 +101,7 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+[Ll]ogs/
 [Oo]ut/
 msbuild.log
 msbuild.err
@@ -413,3 +414,6 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+
+AppData/
+**/.env

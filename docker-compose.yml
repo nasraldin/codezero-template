@@ -1,8 +1,238 @@
-version: '3.4'
+#  <author>Nasr Aldin</author>
+#  <email>nasr2ldin@gmail.com</email>
+#  <github>https://github.com/nasraldin</github>
+#  <date>05/09/2021 02:13 AM</date>
+
+version: "3.7"
 
 services:
+  nginx:
+    build:
+      context: nginx/
+    container_name: nginx
+    volumes:
+      - .cert/https/api.dev.crt:/etc/ssl/certs/api.dev.crt:ro
+      - .cert/https/api.dev.key:/etc/ssl/private/api.dev.key:ro
+    ports:
+      - "8088:80"
+      - "5002:443"
+    networks:
+      - app-network
   api:
     image: ${DOCKER_REGISTRY-}api
+    container_name: api.dev
     build:
       context: .
       dockerfile: src/API/Dockerfile
+    environment:
+      DOTNET_ENVIRONMENT: ${DOTNET_ENVIRONMENT}
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      # MARIADB_HOST: ${MARIADB_HOST}
+      # MARIADB_PORT: ${MARIADB_PORT}
+      # MARIADB_USERNAME: ${MARIADB_USERNAME}
+      # MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      ConnectionStrings__MariaDB__DefaultConnection: ${DEFAULT_CONNECTION}
+    networks:
+      - app-network
+    depends_on:
+      - mariadb
+  sso:
+    image: jboss/keycloak
+    container_name: sso
+    restart: always
+    environment:
+      DB_VENDOR: mariadb
+      DB_ADDR: mariadb
+      DB_DATABASE: keycloak
+      DB_USER: ${MARIADB_USERNAME}
+      DB_PASSWORD: ${MARIADB_PASSWORD}
+      KEYCLOAK_USER: ${USERNAME}
+      KEYCLOAK_PASSWORD: ${PASSWORD}
+      JGROUPS_DISCOVERY_PROTOCOL: JDBC_PING
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+    depends_on:
+      - mariadb
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - .docker/mysql/init:/docker-entrypoint-initdb.d
+      - mariadb:/var/lib/mysql
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
+    depends_on:
+      - phpmyadmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      - PMA_HOST=mariadb
+      - PMA_PORT=3306
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - PMA_ARBITRARY=1
+    restart: always
+    ports:
+      - 8002:80
+    volumes:
+      - phpmyadmin:/sessions
+    networks:
+      - app-network
+  cassandra:
+    image: cassandra:latest
+    container_name: cassandra
+    hostname: cassandra
+    healthcheck:
+      test: ["CMD", "cqlsh", "-e", "describe keyspaces"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+    restart: always
+    ports:
+      - "7199:7199" # JMX
+      - "7000:7000" # cluster communication
+      - "7001:7001" # cluster communication (SSL)
+      - "9042:9042" # native protocol clients
+      - "9160:9160" # thrift clients
+    volumes:
+      - cassandra_data:/var/lib/cassandra
+    networks:
+      - app-network
+  seq:
+    image: datalust/seq:latest
+    container_name: seq
+    restart: always
+    ports:
+      - "5341:80"
+    environment:
+      - ACCEPT_EULA=Y
+    volumes:
+      - seq_data:/data
+    networks:
+      - app-network
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    environment:
+      ALLOW_EMPTY_PASSWORD: ${ALLOW_EMPTY_PASSWORD}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    volumes:
+      - redis_data:/var/lib/redis/data
+    networks:
+      - app-network
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: redis-commander
+    hostname: redis-commander
+    restart: always
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8003:8081"
+    networks:
+      - app-network
+  camunda:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile.camunda
+    container_name: camunda
+    restart: always
+    ports:
+      - "8009:8009"
+      - "8008:8080"
+    environment:
+      DB_DRIVER: ${DB_DRIVER}
+      DB_URL: ${DB_URL}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      WAIT_FOR: ${WAIT_FOR}
+      WAIT_FOR_TIMEOUT: ${WAIT_FOR_TIMEOUT}
+    networks:
+      - app-network
+    depends_on:
+      - mariadb
+  rabbitmq:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile.rabbitmq
+    container_name: rabbitmq
+    restart: always
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=$RABBITMQ_ERLANG_COOKIE
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq/
+      - rabbitmq_logs:/var/log/rabbitmq/
+      - rabbitmq_etc:/etc/rabbitmq/
+    networks:
+      - app-network
+  sftp:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile.sftp
+    container_name: sftp
+    restart: always
+    volumes:
+      - sftp_data:/home/codezero/upload
+    ports:
+      - "2222:22"
+    command: nasr:nasr:1001
+    networks:
+      - app-network
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    restart: always
+    ports:
+      - "9000:9000"
+    command: -H unix:///var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  dataprotection_keys:
+    driver: local
+  mariadb:
+    driver: local
+  phpmyadmin:
+    driver: local
+  cassandra_data:
+    driver: local
+  seq_data:
+    driver: local
+  redis_data:
+    driver: local
+  rabbitmq_data:
+    driver: local
+  rabbitmq_logs:
+    driver: local
+  rabbitmq_etc:
+    driver: local
+  sftp_data:
+    driver: local
+  portainer_data:
+    driver: local
