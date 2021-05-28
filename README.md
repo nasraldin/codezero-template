@@ -39,7 +39,7 @@ If you like or are using this project to learn or start your solution, please gi
 
 <!-- screenshot of swagger ui -->
 [Swagger Client]
-[![Swagger Demo](https://gitlab.com/nasraldin/codezero-template/-/raw/dev/.imgs/Screenshot%202021-05-17-20233327.png)]()
+[![Swagger Demo](https://gitlab.com/nasraldin/codezero-template/-/raw/dev/.imgs/Screenshot-2021-05-17-233400.png)]()
 
 <br/>
 
@@ -80,15 +80,19 @@ To use this template, there are a few options:
 
 These are all covered below.
 
+[![Nuget Demo](https://gitlab.com/nasraldin/codezero-template/-/raw/dev/.imgs/Screenshot-2021-05-27-204153.png)]()
+
 ## Using the Visual Studio Item Template
 
 After installing the template, you should be able to create a new project in Visual Studio and search for CodeZero Template. You should see the template appear in your list of project templates:
 
-![CodeZero Template Project Template]()
+[![Install CodeZero.Template](https://gitlab.com/nasraldin/codezero-template/-/raw/dev/.imgs/Screenshot-2021-05-27-212746.png)]()
+
+[![Install CodeZero.Template](https://gitlab.com/nasraldin/codezero-template/-/raw/dev/.imgs/Screenshot-2021-05-27-212936.png)]()
 
 After choosing this template, provide a project name and finish the project creation wizard. You should be all set.
 
-![Clean Architecture Project Template step 2]()
+[![Sloution Explorer](https://gitlab.com/nasraldin/codezero-template/-/raw/dev/.imgs/Screenshot-2021-05-27-211359.png)]()
 
 Note that the template is generally only updated with major updates to the project. The Gitlab/GitHub repository will always have the latest bug fixes and enhancements.
 
@@ -102,6 +106,15 @@ dotnet new -i CodeZero.Template
 
 You should see the template in the list of templates from `dotnet new` after this install successfully. Look for "CodeZero Template" with Short Name of "codezero".
 
+[![Install CodeZero.Template](https://gitlab.com/nasraldin/codezero-template/-/raw/dev/.imgs/Screenshot-2021-05-27-204430.png)]()
+
+
+```powershell
+dotnet new codezero --help
+```
+
+[![codezero --help](https://gitlab.com/nasraldin/codezero-template/-/raw/dev/.imgs/Screenshot-2021-05-27-211507.png)]()
+
 Navigate to the directory where you will put the new solution.
 
 Run this command to create the solution structure in a subfolder name `Your.ProjectName`:
@@ -113,7 +126,7 @@ dotnet new codezero -o Your.ProjectName
 The `Your.ProjectName` directory and solution file will be created, and inside that will be all of your new solution contents, properly namespaced and ready to run/test!
 
 Example:
-![powershell screenshot showing steps]()
+[![Create new project](https://gitlab.com/nasraldin/codezero-template/-/raw/dev/.imgs/Screenshot-2021-05-27-204817.png)]()
 
 <br/>
 
@@ -134,7 +147,7 @@ $ ./up.sh; popd;
 ```
 
 [dokcer compose]
-[![Swagger Demo](https://gitlab.com/nasraldin/codezero-template/-/raw/dev/.imgs/Screenshot%202021-05-17-20233134.png)]()
+[![Swagger Demo](https://gitlab.com/nasraldin/codezero-template/-/raw/dev/.imgs/Screenshot-2021-05-17-233134.png)]()
 
 <br/>
 
@@ -170,7 +183,7 @@ Other ports
 <br/>
 
 [portainer]
-[![Swagger Demo](https://gitlab.com/nasraldin/codezero-template/-/raw/dev/.imgs/Screenshot%202021-05-17-20233327.png)]()
+[![Swagger Demo](https://gitlab.com/nasraldin/codezero-template/-/raw/dev/.imgs/Screenshot-2021-05-17-233327.png)]()
 
 <br/>
 
@@ -205,6 +218,13 @@ dotnet run --project /src/API/API.csproj
 </details>
 
 <br/>
+
+## Supported Types you can use with MariaDb
+- .NET primitives: bool, byte, char, double, float, int, long, sbyte, short, uint, ulong, ushort
+- Common types: DateTime, DateTimeOffset, decimal, enum, Guid, string, TimeSpan
+- BLOB types: ArraySegment<byte>, byte[], Memory<byte>, ReadOnlyMemory<byte>
+- String types: Memory<char>, ReadOnlyMemory<char>, StringBuilder
+- Custom MySQL types: MySqlDateTime, MySqlGeometry
 
 ## Branch structure
 

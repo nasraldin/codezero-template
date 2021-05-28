@@ -1,7 +1,7 @@
 version: "3.7"
 
 services:
-  api:
+  codezerotemplate.api:
     environment:
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/root/.dotnet/https/api.dev.crt
@@ -11,11 +11,11 @@ services:
       - DOTNET_USE_POLLING_FILE_WATCHER=true
     ports:
       - "80"
-      - "5001:443"
+      - "443"
     volumes:
       - .cert/https:/root/.dotnet/https:ro
       - dataprotection_keys:/root/.aspnet/DataProtection-Keys
-      # - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      # - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-      - ${HOME}/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
-      - ${HOME}/.aspnet/https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      # - ${HOME}/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+      # - ${HOME}/.aspnet/https:/root/.aspnet/https:ro

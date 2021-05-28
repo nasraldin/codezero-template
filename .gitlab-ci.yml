@@ -13,4 +13,4 @@ build:
 test:
   stage: test
   script:
-    - "dotnet test ./tests/UnitTests/UnitTests.csproj"
+    - "dotnet test ./tests/CodeZeroTemplate.UnitTests/CodeZeroTemplate.UnitTests.csproj"

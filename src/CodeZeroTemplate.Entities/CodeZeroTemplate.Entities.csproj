@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!--Change this {Version} if you fix a bug or add a new rule, for shipping new package.-->
+    <Version>1.0.0</Version>
+    <FileVersion>1.0.0</FileVersion>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <!--Change this {PackageReleaseNotes}, add your relase notes for fix a bug or a new rule.-->
+    <PackageReleaseNotes>Initial release of CodeZeroTemplate</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <!--Import common packages are used across all projects-->
+  <Import Project="..\..\common.props" />
+
+  <ItemGroup>
+    <PackageReference Include="CodeZero" Version="2.3.1" />
+  </ItemGroup>
+</Project>

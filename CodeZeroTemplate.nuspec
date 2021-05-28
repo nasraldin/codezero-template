@@ -10,15 +10,18 @@
     <license type="expression">MIT</license>
     <projectUrl>https://gitlab.com/nasraldin/codezero-template</projectUrl>
     <description>A template for a starting point with providing the minimum amount of code required to get you going. Clean Architecture, DDD, SOLID, CQRS</description>
-    <copyright>Copyright 2020</copyright>
-    <tags>.net core, clean architecture, ddd, solid, cqrs</tags>
+    <copyright>Copyright © 2021, CodeZero</copyright>
+    <tags>.net core, clean architecture, ddd, solid, cqrs, codezero</tags>
     <releaseNotes>Initial release</releaseNotes>
     <packageTypes>
       <packageType name="Template" />
     </packageTypes>
     <icon>./content/icon.png</icon>
+    <dependencies>
+      <dependency id="CodeZero" version="2.2.3" />
+    </dependencies>
   </metadata>
   <files>
-    <file src=".\**" target="content" exclude="**\bin\**\*;**\obj\**\*;**\*.user;**\*.lock.json;**\.DS_Store;**\.git\**\*;**\.github\**\*;**\.vs\**\*;**\.vscode\**;**\*LICENSE;**\*.gitattributes;**\*README.md;**\*.gitignore;**\*nuget.config;.template.config\**\*;**\.gitlab-ci.yml;**\.gitpod.yml;**\appveyor.yml;**\codecov.yml;**\.imgs\**" />
+    <file src=".\**" target="content" exclude="**\bin\**\*;**\obj\**\*;**\*.user;**\*.lock.json;**\.DS_Store;**\.git\**\*;**\.github\**\*;**\.vs\**\*;**\*.gitattributes;**\*.gitignore;**\*nuget.config;.template.config\**\*;**\.gitlab-ci.yml;**\.gitpod.yml;**\appveyor.yml;**\codecov.yml;**\.imgs\**;**\CHANGELOG.md;**\.nupkg\**;**\.docs\**;**\logs\**;**\AppData\**" />
   </files>
 </package>

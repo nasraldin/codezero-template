@@ -3,10 +3,10 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>95b8e4df-5cf2-43a4-8a02-f45c3a75eaaf</ProjectGuid>
+    <ProjectGuid>3d9fbedb-f02e-4d27-9b1d-8d41905ae049</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
-    <DockerServiceName>api</DockerServiceName>
+    <DockerServiceName>codezerotemplate.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">
