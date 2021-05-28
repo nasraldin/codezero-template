@@ -1,0 +1,4 @@
+Clear-Host
+Write-Host "docker compose down all services..."
+docker-compose down
+Write-Host "down done!"

@@ -16,7 +16,7 @@ before_build:
   - cmd: dotnet --version # Display .NET Core version
   - dotnet restore ./CodeZeroTemplate.sln
   - dotnet build ./CodeZeroTemplate.sln
-  - dotnet test ./tests/UnitTests/UnitTests.csproj
+  - dotnet test ./tests/CodeZeroTemplate.UnitTests/CodeZeroTemplate.UnitTests.csproj
 
 build:
   project: ./CodeZeroTemplate.sln
@@ -36,12 +36,12 @@ build:
 clone_depth: 1
 test_script:
   # restore packages for our unit tests
-  - cmd: dotnet restore ./tests/UnitTests/UnitTests.csproj --verbosity m
+  - cmd: dotnet restore ./tests/CodeZeroTemplate.UnitTests/CodeZeroTemplate.UnitTests.csproj --verbosity m
   # run the unit tests (requires changing into the test directory)
-  - cmd: cd ./tests/UnitTests
+  - cmd: cd ./tests/CodeZeroTemplate.UnitTests
   - cmd: dotnet test
   - cmd: mkdir coverage
-  - OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:test -filter:"+[UnitTestTargetProject*]* -[IdentityService*]*" -output:"./coverage/OpenCover.xml"
+  - OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:test -filter:"+[UnitTestTargetProject*]* -[CodeZeroTemplate*]*" -output:"./coverage/OpenCover.xml"
   - codecov -f "./coverage/OpenCover.xml"
 
 # on_finish:

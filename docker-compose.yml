@@ -2,13 +2,13 @@
 #  <email>nasr2ldin@gmail.com</email>
 #  <github>https://github.com/nasraldin</github>
 #  <date>05/09/2021 02:13 AM</date>
-
 version: "3.7"
 
 services:
   nginx:
     build:
-      context: nginx/
+      context: .
+      dockerfile: .docker/Dockerfile.nginx
     container_name: nginx
     volumes:
       - .cert/https/api.dev.crt:/etc/ssl/certs/api.dev.crt:ro
@@ -18,19 +18,15 @@ services:
       - "5002:443"
     networks:
       - app-network
-  api:
-    image: ${DOCKER_REGISTRY-}api
-    container_name: api.dev
+  codezerotemplate.api:
+    image: ${DOCKER_REGISTRY-}codezerotemplateapi
+    container_name: codezerotemplate.dev
     build:
       context: .
-      dockerfile: src/API/Dockerfile
+      dockerfile: src/CodeZeroTemplate.API/Dockerfile
     environment:
       DOTNET_ENVIRONMENT: ${DOTNET_ENVIRONMENT}
       ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
-      # MARIADB_HOST: ${MARIADB_HOST}
-      # MARIADB_PORT: ${MARIADB_PORT}
-      # MARIADB_USERNAME: ${MARIADB_USERNAME}
-      # MARIADB_PASSWORD: ${MARIADB_PASSWORD}
       ConnectionStrings__MariaDB__DefaultConnection: ${DEFAULT_CONNECTION}
     networks:
       - app-network

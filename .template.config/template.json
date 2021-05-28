@@ -1,7 +1,13 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "Nasr Aldin",
-  "classifications": ["WebAPI", "Web", "Solution", "CodeZero"],
+  "classifications": [
+    "WebAPI",
+    "Web",
+    "Solution",
+    "CodeZero",
+    "Clean Architecture"
+  ],
   "name": "CodeZero Template",
   "description": "A template for a starting point with providing the minimum amount of code required to get you going. Clean Architecture, DDD, SOLID, CQRS",
   "shortName": "codezero",
@@ -10,36 +16,153 @@
   "identity": "CodeZero.Template",
   "tags": {
     "language": "C#",
-    "type": "project"
+    "type": "solution"
   },
   "sourceName": "CodeZeroTemplate",
   "preferNameDirectory": true,
+  "guids": [
+    "49401A1C-8E85-43CB-AAF3-A7A7CDDC9420",
+    "8218BA25-7905-45D4-A721-3791F6F5654C",
+    "52CD346F-4764-4047-AE16-8EA64685AAB4",
+    "11DD25A0-CE4E-447B-8662-26A72B9AF605",
+    "386FD157-FC2B-4B4C-94BA-D7AB900987F7",
+    "5612D4CB-E55C-48B3-80BC-B4027BAE6B96",
+    "E47197AE-288A-4B30-812F-EBA32BFC223E",
+    "B9E8D03C-5A5E-4AF5-AFFD-7172989B3921",
+    "5092E3E9-0503-489D-950E-0E6A7EC15616",
+    "6550DC84-E5B6-4BB2-AAD8-83DEC99CDCAB",
+    "83C42A6C-BF63-46AE-9453-C6C91C971AE8",
+    "893DAF4C-45CF-4E6C-8CE3-35EBA956EF95",
+    "67BF1F5D-2565-4A75-8748-5648E2050335",
+    "3D9FBEDB-F02E-4D27-9B1D-8D41905AE049",
+    "E8D3DF50-427D-40EC-93D2-0B781DFCDE62",
+    "c78a43fb-0c6c-4b2e-bac8-b0d721cb7eff",
+    "06795D9D-A770-44B9-9B27-03C6ABDB1BAE"
+  ],
+  "primaryOutputs": [
+    { "path": "src" },
+    { "path": "tests" },
+    { "path": "ApplicationCore" },
+    { "path": "Infrastructure" },
+    { "path": "Services" },
+    { "path": "src/CodeZeroTemplate.API/CodeZeroTemplate.API.csproj" },
+    {
+      "path": "src/CodeZeroTemplate.Entities/CodeZeroTemplate.Entities.csproj"
+    },
+    { "path": "src/CodeZeroTemplate.Core/CodeZeroTemplate.Core.csproj" },
+    { "path": "src/CodeZeroTemplate.Data/CodeZeroTemplate.Data.csproj" },
+    { "path": "src/CodeZeroTemplate.Infra/CodeZeroTemplate.Infra.csproj" },
+    {
+      "path": "tests/CodeZeroTemplate.UnitTests/CodeZeroTemplate.UnitTests.csproj"
+    },
+    {
+      "path": "tests/CodeZeroTemplate.IntegrationTests/CodeZeroTemplate.IntegrationTests.csproj"
+    },
+    {
+      "path": "tests/CodeZeroTemplate.FunctionalTests/CodeZeroTemplate.FunctionalTests.csproj"
+    },
+    { "path": "docker-compose.dcproj" },
+    { "path": "Solution Items" },
+    { "path": "CodeZeroTemplate.sln" }
+  ],
+  "symbols": {
+    "Framework": {
+      "type": "parameter",
+      "description": "The target framework for the project.",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "net5.0",
+          "description": "Target net5.0"
+        }
+      ],
+      "replaces": "net5.0",
+      "defaultValue": "net5.0"
+    },
+    "HttpPort": {
+      "type": "parameter",
+      "datatype": "integer",
+      "description": "Port number to use for the HTTP endpoint in launchSettings.json."
+    },
+    "HttpPortGenerated": {
+      "type": "generated",
+      "generator": "port"
+    },
+    "HttpPortReplacer": {
+      "type": "generated",
+      "generator": "coalesce",
+      "parameters": {
+        "sourceVariableName": "HttpPort",
+        "fallbackVariableName": "HttpPortGenerated"
+      },
+      "replaces": "57772"
+    },
+    "HttpsPort": {
+      "type": "parameter",
+      "datatype": "integer",
+      "description": "Port number to use for the HTTPS endpoint in launchSettings.json."
+    },
+    "HttpsPortGenerated": {
+      "type": "generated",
+      "generator": "port",
+      "parameters": {
+        "low": 44300,
+        "high": 44399
+      }
+    },
+    "HttpsPortReplacer": {
+      "type": "generated",
+      "generator": "coalesce",
+      "parameters": {
+        "sourceVariableName": "HttpsPort",
+        "fallbackVariableName": "HttpsPortGenerated"
+      },
+      "replaces": "44387"
+    }
+  },
   "sources": [
     {
       "source": "./",
       "target": "./",
       "exclude": [
-        "**/README.md",
         "**/nuget.config",
-        "**/LICENSE",
         "**/.gitattributes",
         "**/.gitignore",
         "**/*.nupkg",
         "**/[Bb]in/**",
         "**/[Oo]bj/**",
-        ".template.config/**/*",
-        ".vs/**/*",
+        "**/.template.config/**/*",
+        "**/.vs/**/*",
         "**/*.filelist",
         "**/*.user",
         "**/.git/**",
         "**/.github/**",
         "*.nuspec",
+        "**/.lock.json",
         "**/.DS_Store",
         "**/.gitlab-ci.yml",
         "**/.gitpod.yml",
         "**/appveyor.yml",
-        "**/codecov.yml"
-      ]
+        "**/codecov.yml",
+        "**/.imgs/**",
+        "**/CHANGELOG.md",
+        "**/.nupkg/**",
+        "**/.docs/**"
+      ],
+      "rename": {
+        ".env.template": ".env",
+        "api.env.template": ".env",
+        "docker_up_ps1": "up.ps1",
+        "docker_up_sh": "up.sh",
+        "docker_down_ps1": "down.ps1",
+        "docker_down_sh": "down.sh",
+        "dotnet-cert_ps1": "dotnet-cert.ps1",
+        "dotnet-cert_sh": "dotnet-cert.sh",
+        "dotnet-cert-clean-up_ps1": "dotnet-cert-clean-up.ps1",
+        "dotnet-cert-mac_sh": "dotnet-cert-mac.sh",
+        "hosts_ps1": "hosts.ps1",
+        "hosts_sh": "hosts.sh"
+      }
     }
   ]
 }
